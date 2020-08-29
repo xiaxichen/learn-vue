@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../vue.js"></script>
+    <link rel="stylesheet" type="text/css" href="../animate.compat.css">
+    <style>
+        /*@keyframes bounce-in {*/
+        /*    0% {*/
+        /*        transform: scale(0);*/
+        /*    }*/
+        /*    50% {*/
+        /*        transform: scale(1.5);*/
+        /*    }*/
+        /*    100% {*/
+        /*        transform: scale(1);*/
+        /*    }*/
+        /*}*/
+        .fate-enter,.fate-leave-to{
+            opacity: 0;
+        }
+        .fate-enter-active,.fate-leave-active{
+            transition: opacity 3s;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app" >
+<!--    type 类型设置可以保证动画时长以transition为主-->
+<!--    appear 设置可以设置载入动画-->
+<!--    :duration 可以自己定义动画时长-->
+    <transition :duration="{enter:1000,leave:3000}"
+                name="fade"
+                appear
+                enter-active-class="animated swing fate-enter-active"
+                leave-active-class="animated shakeX fate-leave-active"
+                appear-active-class="animated swing">
+        <div v-show="show">Hello World</div>
+    </transition>
+    <button @click="handlerClick">toggle</button>
+</div>
+</body>
+<script>
+    //animated 提供的是 @keyframes
+    vm = new Vue({
+        el: "#app",
+        data: {
+            show: true
+        },
+        components: {},
+        methods: {
+            handlerClick: function () {
+                this.show = !this.show
+            }
+        }
+    })
+</script>
+</html>
