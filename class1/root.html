@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <div>
+        <input type="text" v-model="todoValue">
+        <button @click="handleBtnClick">提交</button>
+    </div>
+    <ul>
+        <!--        <li v-for="item in items">{{item}}</li>-->
+        <todo-item :content="item.message"
+                   :index = "index"
+                   v-for="(item,index) in items"
+                   @delete="handleItemDelete"
+                   :key="item.message">
+        </todo-item>
+    </ul>
+</div>
+<script>
+    /*全局组件
+    Vue.component("TodoItem", {
+        props:['content'],
+        // template: "<li>"+this.content+"</li>"
+        template: "<li>{{this.content}}</li>"
+    })
+     */
+    //局部组件
+    var TodoItem = {
+        props: ['content','index'],
+        template: "<li @click='handleItemClick'>{{content}}</li>",
+        methods: {
+            handleItemClick: function () {
+                this.$emit("delete",this.index)
+            }
+        }
+    }
+    var app = new Vue({
+        //选择dom节点
+        el: "#app",
+        //组件注册
+        components: {
+            TodoItem: TodoItem,
+        },
+        //要渲染的数据
+        data: {
+            items: [],
+            todoValue: ""
+        },
+        //注册的方法
+        methods: {
+            handleBtnClick: function () {
+                this.items.push({"message": this.todoValue})
+                this.todoValue = ""
+            },
+            handleItemDelete: function (index) {
+                // console.log(this.$data.items[index])
+                this.items.splice(index,1);
+                // console.log(splice[0].message)
+                console.log(index)
+            }
+        }
+    })
+</script>
+</body>
+</html>

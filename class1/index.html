@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf8">
+<script src="../vue.js"></script>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <div id="app">
+        <input type="text" v-model="inputValue">
+        <button v-on:click="handleBtnClick">提交</button>
+        <ul v-on:click="handleBtnClick">
+            <li v-for="item in items" :key="item.message">{{item.message}}</li>
+        </ul>
+    </div>
+    <ul>
+        <li>这是第1节课</li>
+        <li>这是第2节课</li>
+        <li>这是第3节课</li>
+    </ul>
+
+    <ul id="app2">
+        <li v-for="item in items" v-if="item">{{item.message}}</li>
+    </ul>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                items: [{"message": "这是第一节课"}, {"message": "这是第二节课"}]
+                ,inputValue:""
+            }
+
+            , methods: {
+                handleBtnClick:  function() {
+                    console.log(this.inputValue)
+                    this.items.push({"message":this.inputValue})
+                }
+            }
+        })
+        var app1 = new Vue({
+            el: '#app2',
+            data: {
+                items: [{"message": "这是第一节课"}, {"message": "这是第二节课"}]
+            }
+        })
+    </script>
+
+</head>
+<body>
+
+</body>
+</html>
