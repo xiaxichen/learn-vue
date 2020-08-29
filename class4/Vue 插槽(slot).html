@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+
+<div id="app">
+    <child>
+        <p>Dell</p>
+    </child>
+    <body-content>
+        <!--        给插槽取名字叫做具名插槽-->
+<!--        <template v-slot:header>header</template>-->
+<!--        <template v-slot:footer>float</template >-->
+
+        <div slot="footer">footer</div>
+    </body-content>
+</div>
+</body>
+<script>
+    Vue.component("child", {
+        props: ['content'],
+        template: `
+          <div>
+          <p>Hello</p>
+          <slot></slot>
+          </div>`,//slot 插槽语法 使子组件显示父组件插入的标签 如果父组件没有向子组件传值则显示缺省节点
+        methods: {}
+    })
+    Vue.component("body-content", {
+        props: ['content'],
+        template: `
+          <div>
+          <slot name="header" class="header">defalue header</slot>
+          <div class="content">body</div>
+          <slot name="footer"></slot>
+          </div>`,//slot 插槽语法 使子组件显示父组件插入的标签 如果父组件没有向子组件传值则显示缺省节点
+        methods: {}
+    })
+
+    vm = new Vue({
+        el: "#app",
+        data: {},
+        components: {},
+    })
+</script>
+</html>

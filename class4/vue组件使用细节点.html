@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../vue.js"></script>
+    <script src="../lodash.min.js"></script>
+</head>
+
+<body>
+<div id="app">
+    <table>
+        <tbody>
+        <tr is="row"></tr>
+        <tr is="row"></tr>
+        <tr is="row"></tr>
+        </tbody>
+    </table>
+</div>
+<div id="app1">
+    <button
+            ref="hello"
+            @click="handlerClick">hello world!
+    </button>
+</div>
+<div id="app2">
+    <counter @change="handleChange" ref="change1"></counter>
+    <counter @change="handleChange" ref="change2"></counter>
+    <div>{{total}}</div>
+</div>
+</body>
+<script>
+    var Row = {
+        data: function () {
+            return {
+                content: "this is a row"
+            }
+        },
+        template: "<tr><td>{{content}}</td></tr>"
+    }
+    var vm = new Vue({
+        el: "#app",
+        components: {
+            Row: Row
+        }
+    });
+    var vm1 = new Vue({
+        el: "#app1",
+        methods: {
+            handlerClick: function () {
+                //拿到组件的引用 即被赋予属性的dom节点
+                console.log(this.$refs.hello)
+            }
+        }
+    })
+    var Counter = {
+        template: "<button @click='handlerClick1'>{{number}}</button>",
+        data: function () {
+            return {number: 0}
+        },
+        methods: {
+            handlerClick1: function () {
+                this.number++
+                this.$emit('change')
+            }
+        }
+    }
+    var vm2 = new Vue({
+        el: "#app2",
+        components: {
+            Counter: Counter
+        },
+        data: {
+            total: 0
+        },
+        methods: {
+            handleChange: function () {
+                // 两个子组件的和
+                this.total = this.$refs.change1.number + this.$refs.change2.number
+            }
+        }
+    })
+</script>
+</html>

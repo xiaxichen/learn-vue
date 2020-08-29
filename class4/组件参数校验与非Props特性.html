@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+
+<div id="app">
+    <child></child>
+
+</div>
+</body>
+<script>
+    // 子组件参数检测认证 在 道具 props 中 使用对象限制传值类型 如 String 为字符串 Number 为数值 Object 为对象 [] 为选项中都可
+    // 还可以使用以下写法 如 {content:{}}
+    var Child = {
+        props: {
+            content: {
+                type: [Number, String],
+                // required: false,//是否为必须参数,
+                // default: "default value" //缺省值
+                validator:function (value){
+                    return value.length>5
+                }//校验器
+            }
+        },
+        template: "<div>{{content}}</div>",
+        methods: {}
+    }
+    vm = new Vue({
+        el: "#app",
+        data: {},
+        components: {Child: Child}
+    })
+</script>
+</html>

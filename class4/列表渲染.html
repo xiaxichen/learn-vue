@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../vue.js"></script>
+    <script src="../lodash.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <div v-for="(item,index) in list" :key="item.id">{{item.text}}---{{index}}</div>
+</div>
+<div id="app1">
+    <div v-for="(item,key,index) in userInfo" :key="item.id">{{item +" "+ key}}---{{index}}</div>
+</div>
+<script>
+    // vue list Responsive function : push 添加元素 pop 弹出最后一个元素 shift 删除数组对象 unshift 数组对象加一些内容  splice 切片 sort 排序 reverse 取反
+    // 第二种改变渲染数据 改变 引用即改变内存地址指向 可以自行重新创建对象 或者使用vue自带的 set 方法 vm.$set(obj,key,value)
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            list: [
+                {text: "hello", id: "01001"},
+                {text: "xia", id: "01002"},
+                {text: "nice", id: "01003"},
+                {text: "to", id: "01004"},
+                {text: "meet", id: "01005"},
+                {text: "you", id: "01006"}]
+        }
+    });
+
+    var vm1 = new Vue({
+        el: "#app1",
+        data: {
+            userInfo: {
+                name: "Dell",
+                age: 28,
+                gander: "male",
+                salary: "secret"
+            }
+        }
+    });
+    //如果不想让最外层为div 可以使用template占位符
+    //example:
+    //     <tamplate>
+    //     <div v-for="(item,index) in list" :key="item.id">{{item.text}}---{{index}}</div>
+    //     <span>{{item.text}}</span>
+    //     </tamplate>
+
+    //example:
+    //     <div>
+    //     <div v-for="(item,index) in list" :key="item.id">{{item.text}}---{{index}}</div>
+    //     <span>{{item.text}}</span>
+    //     </div>
+
+</script>
+</body>
+</html>

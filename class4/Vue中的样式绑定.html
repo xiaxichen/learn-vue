@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title></title>
+    <script src="../vue.js"></script>
+    <style>
+        .activated {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <!--    <div @click="handleDivClick" :class="{activated:isActivated}">-->
+    <!--        hello World!-->
+    <!--    </div>-->
+    <div @click="handleDivClick" :class="[activated,activatedOne]" :style="[styleObj,{fontSize:'20px'}]">
+        hello World!
+    </div>
+</div>
+<script>
+    var vm = new Vue({
+        el: "#app",
+        // data: {
+        //     isActivated: false
+        // },
+        data: {
+            activated: "",
+            activatedOne: "activated-one",
+            styleObj: {
+                color: "yellow"
+            }
+        },
+        methods: {
+            handleDivClick: function () {
+                this.activated = this.activated === "activated" ? "" : "activated"
+            }
+        }
+    });
+</script>
+</body>
+</html>

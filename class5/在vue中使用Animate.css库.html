@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../vue.js"></script>
+    <link rel="stylesheet" type="text/css" href="../animate.compat.css">
+    <style>
+        @keyframes bounce-in {
+            0% {
+                transform: scale(0);
+            }
+            50% {
+                transform: scale(1.5);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /*.fade-enter-active {*/
+        /*    transform-origin: left center;*/
+        /*    animation: bounce-in 1s;*/
+        /*}*/
+
+        /*.fade-leave-active {*/
+        /*    transform-origin: left center;*/
+        /*    animation: bounce-in 1s reverse;*/
+        /*}*/
+        /*.active {*/
+        /*    transform-origin: left center;*/
+        /*    animation: bounce-in 1s;*/
+        /*}*/
+
+        /*.leave {*/
+        /*    transform-origin: left center;*/
+        /*    animation: bounce-in 1s reverse;*/
+        /*}*/
+    </style>
+</head>
+<body>
+
+<div id="app" >
+    <!--    重新命名动画-->
+<!--    <transition name="fade" enter-active-class="active" leave-active-class="leave">-->
+<!--        <div v-show="show">Hello World</div>-->
+<!--    </transition>-->
+    <transition name="fade" enter-active-class="animated tada" leave-active-class="animated bounceOutRight">
+        <div v-show="show">Hello World</div>
+    </transition>
+    <button @click="handlerClick">toggle</button>
+</div>
+</body>
+<script>
+    vm = new Vue({
+        el: "#app",
+        data: {
+            show: true
+        },
+        components: {},
+        methods: {
+            handlerClick: function () {
+                this.show = !this.show
+            }
+        }
+    })
+</script>
+</html>

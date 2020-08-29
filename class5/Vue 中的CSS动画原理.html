@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../vue.js"></script>
+    <style>
+        /*.fate-enter{*/
+        /*    opacity: 0;*/
+        /*}*/
+        /*.fate-enter-active{*/
+        /*    transition: opacity 3s;*/
+        /*}*/
+        /*.fate-leave-to{*/
+        /*    opacity: 0;*/
+        /*}*/
+        /*.fate-leave-active{*/
+        /*    transition:opacity 3s;*/
+        /*}*/
+        .fate-enter,.fate-leave-to{
+            opacity: 0;
+        }
+        .fate-leave-active,.fate-enter-active{
+            transition:opacity 3s;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <transition name="fate">
+        <div v-if="show">hello world!</div>
+    </transition>
+    <button @click="handleClick">切换</button>
+</div>
+</body>
+<script>
+    vm = new Vue({
+        el: "#app",
+        data: {
+            show: true
+        },
+        methods: {
+            handleClick: function () {
+                this.show = !this.show
+            }
+        },
+        components: {},
+    })
+</script>
+</html>

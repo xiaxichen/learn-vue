@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+
+<div id="app">
+    <child>
+<!--        slot-scope 接收属性 作用域插槽-->
+        <template slot-scope="props">
+            <li>{{props.item}} -hello</li>
+        </template>
+    </child>
+</div>
+</body>
+<script>
+    Vue.component("child", {
+        data: function () {
+            return {
+                list: [1, 2, 3, 4]
+            }
+        },
+        template: `
+          <div>
+          <ul>
+            <slot v-for="item of list" :item=item></slot>
+          </ul>
+          </div>`
+    })
+    vm = new Vue({
+        el: "#app",
+        data: {},
+        components: {},
+    })
+</script>
+</html>

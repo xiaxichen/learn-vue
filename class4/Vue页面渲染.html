@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app" @click="onShow">
+    <button>点击</button>
+    <!--    v-if 为不显示任何节点属性-->
+    <div v-if="show">{{message}}</div>
+    <div v-else>buy</div>
+    <!--    v-show 为display为none 即不显示 性能高-->
+    <div v-show="show">{{message}}</div>
+</div>
+<!--vue在渲染时为了效率的提交会尽量复用node节点 所以需要使用key等相关参数保证独立渲染-->
+<div id="app1" @click="onShow1">
+    <button>点击</button>
+    <div v-if="!show1">用户名<input type="text" key="username"></div>
+    <div v-else="show1">密码<input type="password" key="password"></div>
+</div>
+<script>
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            show: false,
+            message: "Hello World!"
+        },
+        methods: {
+            onShow: function () {
+                this.show = !this.show
+            }
+        }
+    });
+    var vm1 = new Vue({
+        el: "#app1",
+        data: {
+            show1: false,
+        },
+        methods: {
+            onShow1: function () {
+                this.show1 = !this.show1
+            }
+        }
+    })
+</script>
+</body>
+</html>

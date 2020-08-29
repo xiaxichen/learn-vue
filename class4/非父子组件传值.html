@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+
+<div id="app">
+    <child content="Dell"></child>
+    <child content="Lee"></child>
+
+</div>
+</body>
+<script>
+    Vue.prototype.bus = new Vue()
+    Vue.component("child", {
+        data:function(){
+            return {
+                selfContent:this.content
+            }
+        },
+        props: {
+            content: String
+        },
+        template: '<div @click="handleClick">{{selfContent}}</div>',
+        methods: {
+            handleClick: function () {
+                this.bus.$emit('change', this.selfContent)
+            }
+        },
+        mounted: function () {
+            var _this = this
+            this.bus.$on('change', function (msg) {
+                console.log(msg)
+                _this.selfContent = 123 //每次点击所有的子组件都会变化 所以值已经通过发布订阅模式被其他组件获取到了
+            })
+        }//钩子函数在组件挂载前监听bus的change事件
+    })
+    vm = new Vue({
+        el: "#app",
+        data: {},
+        components: {},
+    })
+</script>
+</html>

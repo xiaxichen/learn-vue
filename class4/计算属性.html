@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>计算属性 方法监听器</title>
+    <script src="../vue.js"></script>
+</head>
+<div id="app">
+    {{fullName }}
+    {{fullName2()}}
+    {{age}}
+    {{fullName3}}
+</div>
+<script>
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            firstName: "Dell",
+            lastName: "Lee",
+            fullName3: "Dell Lee",
+            age: 28
+        },
+        // 监听(拥有缓存)
+        watch: {
+            firstName: function () {
+                console.log("firstName")
+                this.fullName3 = this.firstName + " " + this.lastName;
+            },
+            lastName:function (){
+                console.log("lastName")
+                this.fullName3 = this.firstName + " " + this.lastName;
+            }
+        },
+        //计算属性(拥有缓存)
+        computed: {
+            fullName: function () {
+                console.log("fullName")
+                return this.firstName + " " + this.lastName
+            }
+        },
+        methods: {
+            fullName2: function () {
+                console.log("fullName2")
+                return this.firstName + " " + this.lastName
+            }
+        }
+    });
+
+</script>
+<body>
+
+</body>
+</html>
