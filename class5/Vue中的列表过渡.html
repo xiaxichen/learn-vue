@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.js"></script>
+    <link rel="stylesheet" type="text/css" href="../animate.compat.css">
+    <style>
+        .v-enter, .v-leave-to {
+            opacity: 0;
+        }
+
+        .v-enter-active, .v-leave-active {
+            transition: opacity 1s;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+<!--    当外部标签为transition为group时相当于在transition-group内部每个元素外层增加一个transition-->
+    <transition-group>
+        <div v-for="item of list" :key="item.id">
+            {{item.title}}
+        </div>
+    </transition-group>
+    <button @click="handlerBtnClick">Add</button>
+</div>
+<script>
+    var content = 0;
+    vm = new Vue({
+        el: "#app",
+        data: {
+            list: []
+        },
+        components: {},
+        methods: {
+            handlerBtnClick: function () {
+                this.list.push({
+                    id:content++,
+                    title:"hello world!"
+                })
+            }
+        }
+    })
+</script>
+</body>
+</html>
