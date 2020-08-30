@@ -1,13 +1,18 @@
 <template>
-$END$
+    <div>
+        <div class="home">home</div>
+        <router-link to="/list">列表页</router-link>
+    </div>
 </template>
 
 <script>
 export default {
-name: "Home.vue"
+    name: 'Home'
 }
 </script>
 
-<style scoped>
-
+<style>
+.home {
+    font-size: 20px;
+}
 </style>
