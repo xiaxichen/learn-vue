@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.js"></script>
+    <link rel="stylesheet" type="text/css" href="../animate.compat.css">
+    <style>
+        .v-enter, .v-leave-to {
+            opacity: 0;
+        }
+
+        .v-active, .v-leave-active {
+            transition: opacity 1s;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <!--    两种mode in-out 先进入再隐藏 out-in 先隐藏再进入-->
+    <transition mode="out-in">
+        <!--  因为vue会复用dom 所以需要key重新渲染-->
+        <div v-if="show" key="hello">Hello World</div>
+        <div v-else key="bey">Bey World</div>
+    </transition>
+    <transition mode="out-in">
+        <compoent :is="type"></compoent>
+    </transition>
+    <button @click="handlerClick">toggle</button>
+</div>
+<script>
+    Vue.component('child', {
+        template: "<div>child</div>"
+        , methods: {}
+    })
+    Vue.component('child-one', {
+        template: "<div>child-one</div>"
+        , methods: {}
+    })
+    vm = new Vue({
+        el: "#app",
+        data: {
+            show: true,
+            type: "child"
+        },
+        components: {},
+        methods: {
+            handlerClick: function () {
+                this.show = !this.show
+                this.type= this.type==="child" ? "child-one" :"child"
+            }
+        }
+    })
+</script>
+</body>
+</html>
