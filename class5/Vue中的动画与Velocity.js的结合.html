@@ -13,6 +13,7 @@
     <!--   before-enter 隐藏div后显示则调用此钩子 -->
     <!--   enter 在before-enter执行后显示动画时调用此钩子 -->
     <!--   after-enter 在enter执行后并调用done时后调用此钩子 -->
+    <!--    before-leave 相反-->
     <transition
             name="fade"
             @before-enter="handleBeforEnter"
@@ -93,7 +94,7 @@
                 el.style.opacity = 0;
             }
             , handleEnter: function (el, done) {
-                Velocity(el, {opacity: 1}, {duration: 1000,complete:done})
+                Velocity(el, {opacity: 1}, {duration: 1000, complete: done})
             }
             , handleAfter: function (el) {
                 console.log("动画结束")
