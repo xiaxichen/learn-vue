@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../vue.js"></script>
+    <script src="../velocity.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../animate.compat.css">
+</head>
+<body>
+
+<div id="app">
+    <!--   before-enter 隐藏div后显示则调用此钩子 -->
+    <!--   enter 在before-enter执行后显示动画时调用此钩子 -->
+    <!--   after-enter 在enter执行后并调用done时后调用此钩子 -->
+    <transition
+            name="fade"
+            @before-enter="handleBeforEnter"
+            @enter="handleEnter"
+            @after-enter="handleAfter"
+            @before-leave="handleBeforEnter"
+            @leave="handleEnter"
+            @after-leave="handleAfter"
+    >
+        <div v-show="show">Hello World</div>
+    </transition>
+    <button @click="handleClick">toggle</button>
+</div>
+<div id="app1">
+    <transition
+            name="fade1"
+            @before-enter="handleBeforEnter"
+            @enter="handleEnter"
+            @after-enter="handleAfter"
+            @before-leave="handleBeforEnter"
+            @leave="handleEnter"
+            @after-leave="handleAfter"
+    >
+        <div v-if="show">Hello World</div>
+    </transition>
+    <button @click="handleClick">toggle</button>
+</div>
+<script>
+    vm = new Vue({
+        el: "#app",
+        data: {
+            show: true
+        },
+        components: {},
+        methods: {
+            handleClick: function () {
+                this.show = !this.show
+            }
+            , handleBeforEnter: function (el) {
+                console.log("执行BeforeEnter")
+                el.style.color = "red"
+            }
+            , handleEnter: function (el, done) {
+                console.log("执行Enter")
+                setTimeout(
+                    () => {
+                        console.log("执行定时器")
+                        el.style.color = "green"
+                        //done 执行回调表示函数已经执行完成
+                    }, 2000)
+                setTimeout(() => {
+                    done()
+                }, 4000)
+            }
+            , handleAfter: function (el) {
+                setTimeout(
+                    () => {
+                        console.log("执行After定时器")
+                        el.style.color = "#000"
+                    }, 2000
+                )
+
+            }
+        }
+    })
+    vm1 = new Vue({
+        el: "#app1",
+        data: {
+            show: true
+        },
+        components: {},
+        methods: {
+            handleClick: function () {
+                this.show = !this.show
+            }
+            , handleBeforEnter: function (el) {
+                console.log("执行BeforeEnter")
+                el.style.opacity = 0;
+            }
+            , handleEnter: function (el, done) {
+                Velocity(el, {opacity: 1}, {duration: 1000,complete:done})
+            }
+            , handleAfter: function (el) {
+                console.log("动画结束")
+
+            }
+        }
+    })
+</script>
+</body>
+</html>
