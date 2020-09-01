@@ -21,7 +21,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-@import '~style/assets/style/varibles.styl'
+@import '~style/varibles.styl'
 //1rem = html font-size = 50px
 // 设计师给到的86像素 计算的rem 即 86/100
 .header
