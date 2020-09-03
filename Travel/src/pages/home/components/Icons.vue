@@ -83,6 +83,7 @@ export default {
     padding-bottom: 50%
 
 .icon
+    margin-top 0.1rem
     position relative
     overflow: hidden
     float left
